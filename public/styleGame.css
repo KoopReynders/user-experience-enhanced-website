@@ -92,9 +92,17 @@ form {
 
 
 .highlight {
-    background-color: gold;
-    padding: 1em;
+    background-color: rgb(255 223 0 / 100%);
+    /* padding: 1em; */
+    animation: fade-out 3s ease-out;
 }
+@keyframes fade-out {
+  100% {
+    background-color: rgb(255 223 0 / 0%);
+    padding: 0;
+  }
+}
+
     
 .loading {
     background-color: gold;

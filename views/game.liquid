@@ -39,6 +39,8 @@
         <input type="number" name="score_team_2" placeholder="score" value="{{ scores[0].score_team_2 }}">
       </label>
     </fieldset>
+
+
     
     <button type="submit">Save score</button>
     
@@ -97,6 +99,7 @@
 
     //formdata voorbereiden:
     let formData = new FormData(scoreForm);    
+
     // console.log(formData)
     // for (const [key, value] of formData) {
     //   console.log(key, value);
@@ -122,17 +125,25 @@
     // Parse de nieuwe HTML en maak hiervan een nieuw Document Object Model in het geheugen
     const parser = new DOMParser()
     const responseDOM = parser.parseFromString(responseData, 'text/html')
-
     console.log("responseDOM - Onderwater HTML",responseDOM)
 
     // Zoek in die nieuwe HTML DOM onze nieuwe UI state op, die we via Liquid hebben klaargemaakt
-    const newScores = responseDOM.querySelector('.scores')
+    // const newScores = responseDOM.querySelector('.scores ol')
+    const newScores = responseDOM.querySelector('.scores li:first-of-type')
     console.log("newScores",newScores)
 
     // data van de server toevoegen aan de DOM, aan de scorelijst in de ol
     // Overschrijf de HTML met de nieuwe HTML
     console.log("Data toevoegen aan de DOM")
-    scores.innerHTML = newScores.innerHTML
+    // scores.innerHTML = newScores.innerHTML
+    scores.insertAdjacentElement("afterbegin",newScores)
+    scores.querySelector("li:first-of-type").classList.add("highlight")
+    scores.querySelector("li:first-of-type").addEventListener("animationend",highlight)
+    function highlight(){
+      console.log("animationend")
+      this.classList.remove("highlight")
+      this.removeEventListener("animationend",highlight);
+    }
 
     // Loading state weghalen
     // Nu kan je waarschijnlijk de Loading state vervangen door een Success state
