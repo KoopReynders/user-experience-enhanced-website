@@ -3,71 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score a Game</title>
+    <title>Score page - Keep the Score</title>
     <link rel="stylesheet" href="/styleGame.css">
 </head>
 <body>
 
 <header>
-
     <h1>Keep the Score</h1>
+</header>
 
-  </header>
+<main>
 
+  <h2>Game</h2>
 
+  <!-- Score form met action naar de route /score -->
 
-  <main>
+  <form method="post" action="/score">
 
-    <h2>Game</h2>
+  <fieldset>
+    <legend>Team A</legend>
+    <label>
+      <span>Punten:</span>
+      <input type="number" name="score_team_1" placeholder="score" value="{{ scores[0].score_team_1 }}">
+    </label>
+  </fieldset>
 
-    <!-- Score form met action naar de route /score -->
+  <fieldset>
+    <legend>Team B</legend>
+    <label>
+      <span>Punten:</span>
+      <input type="number" name="score_team_2" placeholder="score" value="{{ scores[0].score_team_2 }}">
+    </label>
+  </fieldset>
 
-   <form method="post" action="/score">
-
-    <fieldset>
-      <legend>Team A</legend>
-      <label>
-        <span>Punten:</span>
-        <input type="number" name="score_team_1" placeholder="score" value="{{ scores[0].score_team_1 }}">
-      </label>
-    </fieldset>
-
-    <fieldset>
-      <legend>Team B</legend>
-      <label>
-        <span>Punten:</span>
-        <input type="number" name="score_team_2" placeholder="score" value="{{ scores[0].score_team_2 }}">
-      </label>
-    </fieldset>
-
-
-    
-    <button type="submit">Save score</button>
-    
-    </form>
-
-  </main>
-
-    {% comment %} 
-      Scores met in de loop de partial score.liquid 
-    {% endcomment %}
-
-    <section id="score">
-      <h2>Scoreverloop</h2>
-
-      <ol class="scores">
-
-        {% for score in scores %}          
-          {% render 'partials/score.liquid', score: score %}
-        {% else %}
-          <p>Er is nog niet gescoord.</p>
-        {% endfor %}
-
-      </ol>
-
-    </section>
 
   
+  <button type="submit">Save score</button>
+  
+  </form>
+
+</main>
+
+{% comment %} 
+  Scores met in de loop de partial score.liquid 
+{% endcomment %}
+
+<section id="score">
+  <h2>Scoreverloop</h2>
+
+  <ol class="scores">
+
+    {% for score in scores %}          
+      {% render 'partials/score.liquid', score: score %}
+    {% else %}
+      <p>Er is nog niet gescoord.</p>
+    {% endfor %}
+
+  </ol>
+
+</section>
 
 
 

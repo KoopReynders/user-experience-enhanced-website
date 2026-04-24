@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games page - Keep the Score</title>
+    <link rel="stylesheet" href="/styleGame.css">
+</head>
+<body>
+
+<header>
+    <h1>Keep the Score</h1>
+</header>
+
+<main>
+
+  <h2>Games</h2>
+  <ol>
+    <li><a href="/score">{{games.team1}} - {{games.team2}}</a></li>
+  </ol>
+
+</main>
+
+<!-- Debug JSON data -->
+
+    <details>
+      <summary>JSON Data</summary>
+      Games
+      <pre>{{ games | json:4 }}</pre>
+    </details> 
+
+</body>
+</html>

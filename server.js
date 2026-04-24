@@ -155,18 +155,34 @@ app.get('/message', async function (request, response) {
 */
 
 
-//SCORE
-app.get('/game', async function (request, response) {
+//KEEP THE SCORE
+
+//Game page
+app.get('/games', async function (request, response) {
+    // Fetch de data die je nodig hebt
+    const gamesObj = {
+        game: 1, 
+        team1: "Team A", 
+        team2: "Team B"
+    }
+    // Render de bijhorende view en geef de data door
+    response.render('games.liquid', {
+        games: gamesObj
+    })
+})
+//Score page
+app.get('/score', async function (request, response) {
     // Fetch de data die je nodig hebt
     const scoreResponse = await fetch('https://fdnd.directus.app/items/score?sort=-date_created')
     const scoreResponseJSON = await scoreResponse.json()
     //console.log(scoreResponseJSON)
 
     // Render de bijhorende view en geef hier data mee
-    response.render('game.liquid', {
+    response.render('score.liquid', {
         scores: scoreResponseJSON.data
     })
 })
+
 //SCORE POST
 app.post('/score', async function (request, response) {
     console.log("POST")
@@ -185,7 +201,7 @@ app.post('/score', async function (request, response) {
     const postResponseJSON = await postResponse.json();        
     // console.log("POST succes",postResponseJSON)
 
-    response.redirect(303, '/game')
+    response.redirect(303, '/score')
 })
 
 
